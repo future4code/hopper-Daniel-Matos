@@ -48,3 +48,9 @@ b = c
 
 console.log("O novo valor de a é", a)
 console.log("O novo valor de b é", b)
+
+// Desafio
+let num1 = Number(prompt("Digite o primeiro número"))
+let num2 = Number(prompt("Digite o segundo número"))
+console.log(`1. ${num1} somado a ${num2} resulta em: ${num1 + num2}`)
+console.log(`2. ${num1} multiplicado por ${num2} resulta em: ${num1 * num2}`)
