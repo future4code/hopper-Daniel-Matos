@@ -10,11 +10,11 @@
 // 3.
 // let horasTrabalhadasDia
 // let recebeDia
-// alert(`Voce recebe ${recebeDia/horasTrabalhadasDia} por hora`)
+// alert(`Voce recebe ${Number(recebeDia)/Number(horasTrabalhadasDia)} por hora`)
 
 // Exercícios de escrita de código
 
-1.
+// 1.
 let nome
 let idade
 console.log(typeof nome, typeof idade)
