@@ -34,60 +34,60 @@
 // Exercícios de escrita de código
 
 // 1.
-// const nome = prompt("Digite seu nome").trim()
-// const email = prompt("Digite seu e-mail").trim()
-// console.log(email.includes("@") && `O e-mail ${email} foi cadastrado com sucesso. Seja bem-vinda(o), ${nome}!` || "e-mail invalido")
+const nome = prompt("Digite seu nome").trim()
+const email = prompt("Digite seu e-mail").trim()
+console.log(email.includes("@") && `O e-mail ${email} foi cadastrado com sucesso. Seja bem-vinda(o), ${nome}!` || "e-mail invalido")
 
-// // 2.
-// const comidas = ["estrogonofe", "hamburguer", "galinha ensopada", "lasanha", "batata frita"]
-// // a.
-// console.log(comidas)
-// // b.
-// console.log(`Essas são as minhas comidas preferidas: 
-// ${comidas[0]}
-// ${comidas[1]}
-// ${comidas[2]}
-// ${comidas[3]}
-// ${comidas[4]}
-// `)
-// // c.
-// const comidaUsuario = prompt("Digite sua comida prefereida").trim().toUpperCase()
-// comidas[1] = comidaUsuario
-// console.log(`Essas são as minhas comidas preferidas: 
-// ${comidas[0]}
-// ${comidas[1]} // usuario
-// ${comidas[2]}
-// ${comidas[3]}
-// ${comidas[4]}
-// `)
+// 2.
+const comidas = ["estrogonofe", "hamburguer", "galinha ensopada", "lasanha", "batata frita"]
+// a.
+console.log(comidas)
+// b.
+console.log(`Essas são as minhas comidas preferidas: 
+${comidas[0]}
+${comidas[1]}
+${comidas[2]}
+${comidas[3]}
+${comidas[4]}
+`)
+// c.
+const comidaUsuario = prompt("Digite sua comida prefereida").trim().toUpperCase()
+comidas[1] = comidaUsuario
+console.log(`Essas são as minhas comidas preferidas: 
+${comidas[0]}
+${comidas[1]} // usuario
+${comidas[2]}
+${comidas[3]}
+${comidas[4]}
+`)
 
-// // 3.
-// // a.
-// const listaDeTarefas = []
-// // b
-// listaDeTarefas.push(prompt("Tarefa 1").trim())
-// listaDeTarefas.push(prompt("Tarefa 2").trim())
-// listaDeTarefas.push(prompt("Tarefa 3").trim())
-// // c.
-// console.log(listaDeTarefas)
-// // d.
-// const indiceTarefa = prompt(`Digite o indice da tarefa que deseja remover
-// ${listaDeTarefas[0]} - indice 0
-// ${listaDeTarefas[1]} - indice 1
-// ${listaDeTarefas[2]} - indice 2
-// `).trim()
-// // e.
-// const tarefaRemovida = listaDeTarefas.splice(indiceTarefa, 1)
-// console.log(`Tarefa '${tarefaRemovida[0]}' removida com sucesso`)
-// // f.
-// console.log(listaDeTarefas)
+// 3.
+// a.
+const listaDeTarefas = []
+// b
+listaDeTarefas.push(prompt("Tarefa 1").trim())
+listaDeTarefas.push(prompt("Tarefa 2").trim())
+listaDeTarefas.push(prompt("Tarefa 3").trim())
+// c.
+console.log(listaDeTarefas)
+// d.
+const indiceTarefa = prompt(`Digite o indice da tarefa que deseja remover
+${listaDeTarefas[0]} - indice 0
+${listaDeTarefas[1]} - indice 1
+${listaDeTarefas[2]} - indice 2
+`).trim()
+// e.
+const tarefaRemovida = listaDeTarefas.splice(indiceTarefa, 1)
+console.log(`Tarefa '${tarefaRemovida[0]}' removida com sucesso`)
+// f.
+console.log(listaDeTarefas)
 
-// // Desafio
-// // 1.
-// const frase = "We all acquire language the same way. we all digest food the same no significant individual variation"
-// console.log(frase.split(" "))
+// Desafio
+// 1.
+const frase = "We all acquire language the same way. we all digest food the same no significant individual variation"
+console.log(frase.split(" "))
 
-// const frutas = ["Banana", "Morango", "Abacaxi", "Laranja", "Ameixa"]
-// let fruta = "Abacaxi"
-// // let fruta = prompt("Qual fruta deseja pesquisar?").trim
-// console.log(`${frutas[frutas.indexOf(fruta)]} está no indice ${frutas.indexOf(fruta)}`)
+const frutas = ["Banana", "Morango", "Abacaxi", "Laranja", "Ameixa"]
+let fruta = "Abacaxi"
+// let fruta = prompt("Qual fruta deseja pesquisar?").trim
+console.log(`${frutas[frutas.indexOf(fruta)]} está no indice ${frutas.indexOf(fruta)}`)
