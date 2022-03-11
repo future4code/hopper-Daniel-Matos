@@ -1,36 +1,20 @@
-/**
- * EXEMPLO DE UTILIZAÇÃO DA 'comprarCarta'
- * 
- * 
-    const carta = comprarCarta(); // Sorteia uma carta. Por exemplo, o rei de ouros
-    
-    console.log(carta.texto) // imprime o texto da carta. Exemplo: "K♦️" (indica "K" de ouros)
-    console.log(carta.valor) // imprime o valor da carta (um número). Exemplo: 10 (dado que "K" vale 10)
- * 
- * 
- * 
- */
-
 console.log("Boas vindas ao jogo de Blackjack!")
 
-if(confirm("Quer iniciar uma nova rodada?")) {
+// if(confirm("Quer iniciar uma nova rodada?")) {
+if(true){
   const usuario = {
     cartas: [],
-    pontos: 0
+    pontos: 0,
+    addCarta: function({novaCarta}) {
+      this.cartas = [...this.cartas, novaCarta.texto] // usando o metodo push(), todos os obj copiados usando o spread também tem a propriedade alterada
+      this.pontos += novaCarta.valor
+    }
   }
-  const computador = {
-    cartas: [],
-    pontos: 0
-  }
+  const computador = {...usuario}
 
   for(let i = 0; i < 2; i++) {
-    const cartaUsuario = comprarCarta()
-    usuario.cartas.push(cartaUsuario.texto)
-    usuario.pontos += cartaUsuario.valor
-
-    const cartaComputador = comprarCarta()
-    computador.cartas.push(cartaComputador.texto)
-    computador.pontos += cartaComputador.valor
+    usuario.addCarta(comprarCarta())
+    computador.addCarta(comprarCarta())
   }
 
   console.log(`Usuário: ${usuario.cartas.map(carta => "["+carta+"]")} - ${usuario.pontos}`)
