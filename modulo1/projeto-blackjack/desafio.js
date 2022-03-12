@@ -1,6 +1,6 @@
 console.log("Boas vindas ao jogo de Blackjack!")
 
-if(confirm("Quer iniciar uma nova rodada?")) {
+if (confirm("Quer iniciar uma nova rodada?")) {
   const usuario = {
     cartas: [],
     pontos: 0,
@@ -17,11 +17,10 @@ if(confirm("Quer iniciar uma nova rodada?")) {
 
   let distribuindoCartas = true
   while (distribuindoCartas) {
-    for (let i = 0; i < 2; i++) {
-      usuario.addCarta(comprarCarta())
-      computador.addCarta(comprarCarta())
-    }
-
+    usuario.addCarta(comprarCarta())
+    usuario.addCarta(comprarCarta())
+    computador.addCarta(comprarCarta())
+    computador.addCarta(comprarCarta())
     if (usuario.pontos === 22 || computador.pontos === 22) {
       usuario.zerarCartas()
       computador.zerarCartas()
@@ -36,24 +35,23 @@ if(confirm("Quer iniciar uma nova rodada?")) {
       "\n" +
       "Deseja comprar mais uma carta?"
     )
-
-    if(comprarMaisCarta) usuario.addCarta(comprarCarta())
-    if(usuario.pontos >= 21) comprarMaisCarta = false
+    if (comprarMaisCarta) usuario.addCarta(comprarCarta())
+    if (usuario.pontos >= 21) comprarMaisCarta = false
   }
 
-  let mensagem = (usuario, computador) =>{
-    return `Suas cartas são ${usuario.cartas.map(carta => "[" + carta + "]")} . \nSua pontuação é ${usuario.pontos}.`+
-    `\n\nAs cartas do computador são ${computador.cartas.map(carta => "[" + carta + "]")} . \nA pontuação do computador é ${computador.pontos}.`
-  } 
+  let mensagem = (usuario, computador) => {
+    return `Suas cartas são ${usuario.cartas.map(carta => "[" + carta + "]")} . \nSua pontuação é ${usuario.pontos}.` +
+      `\n\nAs cartas do computador são ${computador.cartas.map(carta => "[" + carta + "]")} . \nA pontuação do computador é ${computador.pontos}.`
+  }
 
-  if(usuario.pontos > 21) alert(mensagem(usuario, computador) +  `\n\nO computador ganhou!`)
+  if (usuario.pontos > 21) alert(mensagem(usuario, computador) + `\n\nO computador ganhou!`)
 
-  if(usuario.pontos <= 21) {
-    while(computador.pontos < usuario.pontos) {
+  if (usuario.pontos <= 21) {
+    while (computador.pontos < usuario.pontos) {
       computador.addCarta(comprarCarta())
     }
-    if(computador.pontos === usuario.pontos) alert(mensagem(usuario, computador) + `\n\nEmpate!`)
-    else if(computador.pontos > 21 || usuario.pontos > computador.pontos) alert(mensagem(usuario, computador) + `\n\nO usuário ganhou!`)
+    if (computador.pontos === usuario.pontos) alert(mensagem(usuario, computador) + `\n\nEmpate!`)
+    else if (computador.pontos > 21 || usuario.pontos > computador.pontos) alert(mensagem(usuario, computador) + `\n\nO usuário ganhou!`)
     else if (computador.pontos > usuario.pontos) alert(mensagem(usuario, computador) + `\n\nO computador ganhou!`)
   }
 }
