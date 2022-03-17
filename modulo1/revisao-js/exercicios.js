@@ -10,7 +10,7 @@ function retornaTamanhoArray(array) {
 
 // EXERCÍCIO 02
 function retornaArrayInvertido(array) {
-  
+  return array.map((item, indice) => array[(array.length - 1) - indice])
 }
 
 // EXERCÍCIO 03
