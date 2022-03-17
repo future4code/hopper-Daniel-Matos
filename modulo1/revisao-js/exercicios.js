@@ -30,7 +30,7 @@ function retornaNumerosParesElevadosADois(array) {
 
 // EXERCÍCIO 06
 function retornaMaiorNumero(array) {
-  
+  return array.sort((a, b) => a - b)[array.length - 1]
 }
 
 // EXERCÍCIO 07
