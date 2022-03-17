@@ -35,7 +35,13 @@ function retornaMaiorNumero(array) {
 
 // EXERCÍCIO 07
 function retornaObjetoEntreDoisNumeros(num1, num2) {
-
+  const getHigherNumber = (num1, num2) => num1 > num2 && num1 || num2
+  const getSmallestNumber = (num1, num2) => num2 < num1 && num2 || num1
+  return {
+    maiorNumero: getHigherNumber(num1, num2),
+    maiorDivisivelPorMenor: getHigherNumber(num1, num2) % getSmallestNumber(num1, num2) === 0,
+    diferenca: getHigherNumber(num1, num2) - getSmallestNumber(num1, num2)
+  }
 }
 
 // EXERCÍCIO 08
