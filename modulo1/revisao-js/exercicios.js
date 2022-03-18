@@ -68,7 +68,16 @@ function retornaSegundoMaiorESegundoMenor(array) {
 
 // EXERCÍCIO 11
 function retornaChamadaDeFilme(filme) {
-   
+  const imprimirAtores = listaAtores => {
+    let atores = ""
+    for(let i = 0; i < listaAtores.length; i++) {
+      if(i === listaAtores.length - 1) atores += listaAtores[i]
+      else atores += listaAtores[i]+", "
+    }
+    return atores
+  }
+  return `Venha assistir ao filme ${filme.nome}, de ${filme.ano}, `
+  +`dirigido por ${filme.diretor} e estrelado por ${imprimirAtores(filme.atores)}.`
 }
 
 // EXERCÍCIO 12
