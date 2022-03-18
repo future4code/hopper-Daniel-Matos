@@ -1,0 +1,41 @@
+Resumo sobre os 7 passos fundamentais para a resolução de problemas 
+
+A principal função de um programador é resolver problemas, e essa é uma habilidade que pode ser desenvolvida como um musculo na nossa mente com a prática correta e constante
+Uma maneira interessante de desenvolver esse musculo é organizando isso em passos de maneira estruturada
+Dessa maneira, ao longo do tempo, com a pratica vamos observando pradrões e tendo percepções
+Internalizando cada passo até o momento em que isso se torna automático
+
+O 1 passo é observar o problema a ser resolvido
+Alocar o maximo de recurso de atenção nele
+O que o codigo deve fazer? quais informações são unicas?
+De primeira é quase inevitavel, o frio na barriga vem
+
+A partir daí retiramos informações relevantes
+Se preciso podemos anotar e organizar essas informações em outro lugar
+De um bloco de notas a um papel de pão
+
+Com as informações mais organizadas começamos a pensar no código, mas nada complexo ainda
+Quais são as entradas? Como elas vão chegar? O que deve sair?
+Agora começamos a modelar esses dados em uma função
+
+Uma boa ideia nesse momento é criar situações
+E se acontecer isso? E se os dados chegarem dessa forma?
+Se preciso, podemos criar isso de maneira visual
+
+É bem provavel que nesse momento tanto nossa mente consciente quanto inconsciente tenha processado melhor o problema
+Mas ainda não temos uma noção concreta de como colocar isso no código
+Começam chegar várias ideias e precisamos externalizar isso de alguma forma
+Uma boa dica agora é simplesmente começar a fazer esse código da maneira mais simples possivel, mesmo que feio, mesmo que não funcione totalmente ainda
+
+Tento uma estrutura, começamos a testar e ir corrigindo até que ele de fato funcione
+E só a partir daí começamos a refatorar o código encontrando soluções melhores, mais elegantes, mais performaticas
+
+
+"O código perfeito custa caro"
+3 - introdução
+8 - passo 1
+13 - passo 2
+17 - passo 3
+21 - passo 4
+25 - passo 5
+30 - passo 6 e 7
