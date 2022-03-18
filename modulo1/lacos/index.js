@@ -57,24 +57,18 @@ const imprimirFrasesArray = (arrayOriginal) => {
 }
 // e)
 const imprimirMaiorMenorNumArray = (arrayOriginal) => {
-  let maiorNum
-  let menorNum
+  let maiorNum = 0
+  let menorNum = Infinity
   for (let i = 0; i < arrayOriginal.length; i++) {
     let numero = arrayOriginal[i]
-
-    if (i === 0) {
-      maiorNum = numero
-      menorNum = numero
-    }
-    else {
-      if (numero > maiorNum) maiorNum = numero
-      if (numero < menorNum) menorNum = numero
-    }
+    if (numero > maiorNum) maiorNum = numero
+    if (numero < menorNum) menorNum = numero
   }
-
   console.log(`O maior número é ${maiorNum} e o menor é ${menorNum}`)
 }
+
 const arrayOriginal = [80, 30, 130, 40, 60, 21, 70, 120, 90, 103, 110, 55]
+
 imprimirItensArray(arrayOriginal)
 imprimirDivisaoItensArray(arrayOriginal)
 imprimirParesArray(arrayOriginal)

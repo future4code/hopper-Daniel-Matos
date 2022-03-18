@@ -79,13 +79,7 @@ console.log(produtosNomes)
 // b)
 const aplicarDesconto = (produtos, desconto) => {
   desconto = (100 - desconto) / 100
-
-  return produtos.map(produto => {
-    return {
-      nome: produto.nome,
-      preco: Number((produto.preco * desconto).toFixed(2)) // https://www.w3schools.com/jsref/jsref_tofixed.asp
-    }
-  })
+  return produtos.map(produto => ( {nome: produto.nome,preco: Number((produto.preco * desconto).toFixed(2))} ))
 }
 const produtosDesconto = aplicarDesconto(produtos, 5)
 console.log(produtosDesconto)
