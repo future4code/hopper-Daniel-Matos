@@ -91,8 +91,9 @@ function retornaPessoasNaoAutorizadas(pessoas) {
 // EXERCÍCIO 14
 function retornaContasComSaldoAtualizado(contas) {
   return contas.map(cliente => {
-    for(let i = 0; i < cliente.compras.length; i++) cliente.saldoTotal -= cliente.compras[i]
-    return {...cliente, compras: []}
+    const comprasTotais = cliente.compras.reduce((acc, cur) => acc + cur, 0)
+    const saldoTotal = cliente.saldoTotal - comprasTotais
+    return {...cliente, saldoTotal, compras: []}
   })
 }
 
