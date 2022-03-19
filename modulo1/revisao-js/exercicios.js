@@ -99,9 +99,9 @@ function retornaContasComSaldoAtualizado(contas) {
 
 // EXERCÍCIO 15A
 function retornaArrayOrdenadoAlfabeticamente(consultas) {
-  const compare = (a,b) => {
-    if (a.nome < b.nome) return -1;
-    if (a.nome > b.nome) return 1;
+  const compare = (paciente1, paciente2) => {
+    if (paciente1.nome < paciente2.nome) return -1;
+    if (paciente1.nome > paciente2.nome) return 1;
     return 0;
   }
   return consultas.sort(compare)
@@ -109,5 +109,15 @@ function retornaArrayOrdenadoAlfabeticamente(consultas) {
 
 // EXERCÍCIO 15B
 function retornaArrayOrdenadoPorData(consultas) {
-   
+  const compare = (paciente1, paciente2) => {
+    let data1 = paciente1.dataDaConsulta.split("/")
+    let data2 = paciente2.dataDaConsulta.split("/")
+    data1 = new Date(data1[2], data1[1]-1, data1[0])
+    data2 = new Date(data2[2], data2[1]-1, data2[0])
+
+    if (data1 < data2) return -1;
+    if (data1 > data2) return 1;
+    return 0;
+  }
+  return consultas.sort(compare)
 }
