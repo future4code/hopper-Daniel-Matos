@@ -13,7 +13,7 @@ body {
 }
 
 .rodape {
-	position: absolute;
+	position: relative;
 	bottom: 0;
   background-color: #1d1d27;
   width: 100%;
@@ -32,6 +32,15 @@ body {
   text-align: center;
   font-size: 20px;
   margin: 50px;
+  height: 100%;
+}
+
+.perfil {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: block;
+  margin-top: 20px;
 }
 
 a {
@@ -39,6 +48,12 @@ a {
   color: #efefef;
   line-height: 30px;
   margin: 0 20px 0 20px;
+}
+
+li {
+  list-style-type: none;
+  text-align: center;
+  display: inline;
 }
 
 tr {
