@@ -41,3 +41,16 @@ a {
   margin: 0 20px 0 20px;
 }
 
+tr {
+  background-color: #1d1d27;
+  color: #efefef;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+}
+
+h2 {
+  text-align: center;
+}
