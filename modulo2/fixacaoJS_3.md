@@ -1,4 +1,4 @@
-> [!Fixação JS 3]
+> Fixação JS 3
 >
 > ```js
 > function calculaNota(ex, p1, p2) {
