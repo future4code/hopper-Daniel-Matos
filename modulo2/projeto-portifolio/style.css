@@ -1,0 +1,65 @@
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background-color: #0C1F3B;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #EFEFEF;
+}
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px 40px 20px 40px;
+  height: 20%;
+  background-color: yellowgreen;
+}
+.logo {
+  font-size: 30px;
+  font-weight: 900;
+  /* background-color: black; */
+  margin: 0;
+  padding: 0;
+  height: 40px;
+  width: 40px;
+  border: 4px solid #EFEFEF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu {
+  display: flex;
+  color: #EFEFEF;
+  font-size: 18px;
+}
+.menu > a {
+  margin-left: 10px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  background-color: brown;
+  height: 100%;
+}
+.whoiam {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 40%;
+}
+.whoiam > span {
+  font-size: 20px;
+  display: block;
+}
+.projects {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 40%;
+  background-color: yellow;
+}
