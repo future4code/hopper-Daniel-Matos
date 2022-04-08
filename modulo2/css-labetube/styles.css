@@ -50,3 +50,27 @@ footer {
   align-items: center;
   background-color: tomato;
 }
+
+@media only screen and (max-width: 1000px) {
+  section.video-galery{
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  section.video-galery{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  section.video-galery{
+    grid-template-columns: 1fr;
+  }
+  header {
+    padding: 0 20px 0 20px;
+  }
+  header input {
+    width: 40%;
+  }
+}
