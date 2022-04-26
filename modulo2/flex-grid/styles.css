@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+}
+.header {
+  background-color: mediumvioletred;
+  position: fixed;
+  top: 0;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header > div {
+  display: flex;
+  width: 200px;
+  justify-content: space-around;
+  align-items: center;
+}
+.header > div > img {
+  width: 20px;
+  height: 20px;
+}
+.corpo {
+  display: flex;
+  height: 100vh;
+  padding-top: 60px;
+}
+.sidebar {
+  background-color: #f2d0e0;
+}
+.footer {
+  background-color: mediumvioletred;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
