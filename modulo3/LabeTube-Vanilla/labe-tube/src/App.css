@@ -1,0 +1,81 @@
+body {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.tela-inteira {
+  height: 100vh;
+}
+header {
+  background-color: orange;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  height: 10%;
+  position: sticky;
+  top: 0;
+}
+.account {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 50%;
+}
+header input {
+  padding: 10px;
+  width: 30%;
+}
+
+.menu-vertical {
+  position: fixed;
+  height: 100%;
+  max-width: 20%;
+  background-color: orange;
+}
+.menu-vertical > ul {
+  margin: 0;
+  padding: 30px;
+}
+.botoes-meunu-vertical {
+  list-style-type: none;
+}
+.painel-de-videos {
+  padding: 20px;
+  margin-left: 20%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.box-pagina-principal {
+  margin: 10px;
+}
+.box-pagina-principal > div {
+  display: flex;
+  align-items: center;
+}
+.box-pagina-principal .account {
+  height: 25px;
+  width: 25px;
+  background-color: gray;
+  margin-right: 10px;
+}
+.box-pagina-principal > img {
+  width: 100%;
+  height: 200px;
+}
+footer {
+  height: 10%;
+  background-color: grey;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
