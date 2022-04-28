@@ -5,6 +5,7 @@ import {
   PostFooter,
   UserPhoto,
   PostPhoto,
+  PostMensage,
 } from "./styles";
 
 import iconeCoracaoBranco from "../../img/favorite-white.svg";
@@ -64,7 +65,16 @@ class Post extends React.Component {
           <p>{this.props.nomeUsuario}</p>
         </PostHeader>
 
-        <PostPhoto src={this.props.fotoPost} alt={"Imagem do post"} />
+        {this.props.fotoPost ? (
+          <PostPhoto src={this.props.fotoPost} alt={"Imagem do post"} />
+        ) : (
+          ""
+        )}
+        {this.props.postagem ? (
+          <PostMensage>{this.props.postagem}</PostMensage>
+        ) : (
+          ""
+        )}
 
         <PostFooter>
           <IconeComContador

@@ -31,3 +31,7 @@ export const UserPhoto = styled.img`
 export const PostPhoto = styled.img`
   width: 100%;
 `;
+
+export const PostMensage = styled.p`
+  padding: 20px;
+`;
