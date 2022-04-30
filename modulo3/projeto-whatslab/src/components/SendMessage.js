@@ -18,8 +18,8 @@ class SendMessage extends React.Component {
     this.setState({ message: e.target.value });
   }
   onClickSendMessage() {
-    console.log(this.state.user);
-    console.log(this.state.message);
+    this.props.onClickSendMessage(this.state.user, this.state.message);
+    this.setState({ user: "", message: "" });
   }
   render() {
     return (

@@ -53,7 +53,7 @@ class Post extends React.Component {
     if (this.state.comentando) {
       componenteComentario = (
         <SecaoComentario
-          aoEnviar={(comentario) => this.aoEnviarComentario(comentario)}
+          aoEnviar={(comentario) => this.onClickComentario(comentario)}
         />
       );
     }
