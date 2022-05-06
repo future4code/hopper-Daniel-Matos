@@ -26,8 +26,14 @@ class App extends React.Component {
   };
 
   componentDidMount() {
+    // localStorage.removeItem("tarefas");
+    // console.log(JSON.parse(localStorage.getItem("tarefas")));
     const tarefasLS = localStorage.getItem("tarefas");
-    this.setState({ tarefas: JSON.parse(tarefasLS) });
+    if (tarefasLS) {
+      this.setState({
+        tarefas: [...JSON.parse(tarefasLS)],
+      });
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -102,17 +108,21 @@ class App extends React.Component {
           </select>
         </InputsContainer>
         <TarefaList>
-          {listaFiltrada.map((tarefa) => {
-            return (
-              <Tarefa
-                completa={tarefa.completa}
-                onClick={() => this.selectTarefa(tarefa.id)}
-                key={tarefa.id}
-              >
-                {tarefa.texto}
-              </Tarefa>
-            );
-          })}
+          {this.state.tarefas ? (
+            listaFiltrada.map((tarefa) => {
+              return (
+                <Tarefa
+                  completa={tarefa.completa}
+                  onClick={() => this.selectTarefa(tarefa.id)}
+                  key={tarefa.id}
+                >
+                  {tarefa.texto}
+                </Tarefa>
+              );
+            })
+          ) : (
+            <p>Adicione uma lista</p>
+          )}
         </TarefaList>
       </div>
     );
