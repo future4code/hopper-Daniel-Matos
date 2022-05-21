@@ -5,7 +5,11 @@ class UsersList extends Component {
     return (
       <div>
         {this.props.users.map((user) => (
-          <p>{user.name}</p>
+          <div key={user.id}>
+            <span>{user.name}</span>
+            <button onClick={() => this.props.deleteUser(user.id)}>X</button>
+            <br />
+          </div>
         ))}
       </div>
     );
