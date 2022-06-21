@@ -26,9 +26,12 @@ class Playlists extends React.Component {
         </button>
         <ul>
           {this.props.playlists.map((playlist) => (
-            <li key={playlist}>
-              <button onClick={() => this.props.togglePlaylist(playlist)}>
-                {playlist}
+            <li key={playlist.id}>
+              <button onClick={() => this.props.togglePlaylist(playlist.name)}>
+                {playlist.name}
+              </button>
+              <button onClick={() => this.props.deletePlaylist(playlist.id)}>
+                deletar
               </button>
             </li>
           ))}
