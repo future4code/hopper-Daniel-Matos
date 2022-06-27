@@ -1,30 +1,30 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Musics from "./components/Musics";
-import Player from "./components/Player";
 import Playlists from "./components/Playlists";
+
+const url =
+  "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists";
+const headers = {
+  headers: {
+    Authorization: "daniel-matos-hooper",
+  },
+};
 
 class App extends Component {
   state = {
     playlists: [],
     currentPlaylist: "",
-    currentMusic: "",
+    musics: [],
   };
 
   componentDidMount() {
-    this.pegarPlaylist();
+    this.loadingPlaylist();
   }
 
-  pegarPlaylist = () => {
+  loadingPlaylist = () => {
     axios
-      .get(
-        "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists",
-        {
-          headers: {
-            Authorization: "daniel-matos-hooper",
-          },
-        }
-      )
+      .get(url, headers)
       .then((response) => {
         this.setState({ playlists: response.data.result.list });
       })
@@ -38,17 +38,9 @@ class App extends Component {
       name: playlist,
     };
     axios
-      .post(
-        "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists",
-        body,
-        {
-          headers: {
-            Authorization: "daniel-matos-hooper",
-          },
-        }
-      )
+      .post(url, body, headers)
       .then(() => {
-        this.pegarPlaylist();
+        this.loadingPlaylist();
       })
       .catch((err) => {
         console.log(err.response.data.message);
@@ -57,27 +49,67 @@ class App extends Component {
 
   deletePlaylist = (playlistId) => {
     axios
-      .delete(
-        `https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${playlistId}`,
-        {
-          headers: {
-            Authorization: "daniel-matos-hooper",
-          },
-        }
-      )
+      .delete(`${url}/${playlistId}`, headers)
       .then(() => {
-        this.pegarPlaylist();
+        if (playlistId === this.state.currentPlaylist.id) {
+          this.setState({ currentPlaylist: "" });
+        }
+        this.loadingPlaylist();
       })
       .catch((err) => console.log(err));
   };
 
-  togglePlaylist = (playlistName) => {
-    this.setState({ currentPlaylist: playlistName });
+  loadingMusics = (playlistId) => {
+    axios
+      .get(`${url}/${playlistId}/tracks`, headers)
+      .then((response) => {
+        this.setState({ musics: response.data.result.tracks });
+      })
+      .catch((error) => {
+        console.log("Erro", error.response.data);
+      });
   };
 
-  toggleMusic = (musicName) => {
-    this.setState({ currentMusic: musicName });
+  addMusic = (musicName, artistName) => {
+    if (this.state.currentPlaylist) {
+      const body = {
+        name: musicName,
+        artist: artistName,
+        url: "http://spoti4.future4.com.br/1.mp3",
+      };
+      axios
+        .post(`${url}/${this.state.currentPlaylist.id}/tracks`, body, headers)
+        .then(() => {
+          this.loadingMusics(this.state.currentPlaylist.id);
+        })
+        .catch((err) => {
+          console.log(err.response.data.message);
+        });
+    }
   };
+
+  togglePlaylist = (playlist) => {
+    this.setState({ currentPlaylist: playlist });
+    this.loadingMusics(playlist.id);
+  };
+
+  closePlaylist = () => {
+    this.setState({ currentPlaylist: "" });
+  };
+
+  renderMusics = () => {
+    if (this.state.currentPlaylist) {
+      return (
+        <Musics
+          currentPlaylist={this.state.currentPlaylist}
+          musics={this.state.musics}
+          addMusic={this.addMusic}
+          closePlaylist={this.closePlaylist}
+        />
+      );
+    }
+  };
+
   render() {
     return (
       <div>
@@ -87,11 +119,7 @@ class App extends Component {
           deletePlaylist={this.deletePlaylist}
           togglePlaylist={this.togglePlaylist}
         />
-        <Musics
-          currentPlaylist={this.state.currentPlaylist}
-          toggleMusic={this.toggleMusic}
-        />
-        <Player currentMusic={this.state.currentMusic} />
+        {this.renderMusics()}
       </div>
     );
   }

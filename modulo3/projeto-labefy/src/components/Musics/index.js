@@ -3,41 +3,47 @@ import React from "react";
 class Musics extends React.Component {
   state = {
     musicName: "",
+    artistName: "",
   };
 
-  onChangeInputMusicName = (event) => {
-    this.setState({ musicName: event.target.value });
+  addMusic = (musicName, artistName) => {
+    if (musicName && artistName) {
+      this.props.addMusic(musicName, artistName);
+      this.setState({ musicName: "", artistName: "" });
+    }
   };
 
-  addMusic = (musicName) => {
-    console.log(musicName);
-  };
   render() {
     return (
       <div>
-        <span>Musics of {this.props.currentPlaylist}</span>
+        <span>Musics of {this.props.currentPlaylist.name}</span>
         <input
-          placeholder="Criar música"
+          placeholder="Música"
           value={this.state.musicName}
-          onChange={this.onChangeInputMusicName}
+          onChange={(event) => this.setState({ musicName: event.target.value })}
         />
-        <button onClick={() => this.addMusic(this.state.musicName)}>+</button>
+        <input
+          placeholder="Artista"
+          value={this.state.artistName}
+          onChange={(event) =>
+            this.setState({ artistName: event.target.value })
+          }
+        />
+        <button
+          onClick={() =>
+            this.addMusic(this.state.musicName, this.state.artistName)
+          }
+        >
+          Adicionar música
+        </button>
+        <button onClick={this.props.closePlaylist}>Fechar Playlist</button>
         <ul>
-          <li>
-            <button onClick={() => this.props.toggleMusic("music 1")}>
-              music 1
-            </button>
-          </li>
-          <li>
-            <button onClick={() => this.props.toggleMusic("music 2")}>
-              music 2
-            </button>
-          </li>
-          <li>
-            <button onClick={() => this.props.toggleMusic("music 3")}>
-              music 3
-            </button>
-          </li>
+          {this.props.musics.map((music) => (
+            <li key={music.id}>
+              {music.name} | {music.artist}
+              <audio controls src={music.url} />
+            </li>
+          ))}
         </ul>
       </div>
     );
