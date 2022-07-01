@@ -1,6 +1,5 @@
-import React, { createContext, useState, useEffect } from "react";
-import axios from "axios";
-import { axiosConfig, baseURL } from "../constants";
+import { createContext, useState, useEffect } from "react";
+import { getProfile } from "../api";
 
 const ProfileContext = createContext();
 
@@ -8,18 +7,16 @@ export function ProfileProvider({ children }) {
   const [profile, setProfile] = useState({});
 
   useEffect(() => {
-    getProfile();
+    changeProfile();
   }, []);
 
-  const getProfile = () => {
-    axios
-      .get(baseURL, axiosConfig)
-      .then((response) => setProfile(response.data.profile))
-      .catch((err) => console.error(err));
-  };
+  const changeProfile = () =>
+    getProfile().then((profile) => {
+      if (profile) setProfile(profile);
+    });
 
   return (
-    <ProfileContext.Provider value={[profile, getProfile]}>
+    <ProfileContext.Provider value={[profile, changeProfile]}>
       {children}
     </ProfileContext.Provider>
   );
