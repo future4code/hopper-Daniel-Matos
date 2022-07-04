@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getMatches, clearMatches } from "../../api";
 import { Container, ContainerMatch } from "../../styles";
+import Match from "./components";
 
-function Matchs() {
+function Matches() {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -25,19 +26,13 @@ function Matchs() {
     return (
       <div>
         <ul>
-          {matches
-            ? matches.map((match) => <Match key={match.id} match={match} />)
-            : null}
+          {matches.length > 0 ? (
+            matches.map((match) => <Match key={match.id} match={match} />)
+          ) : (
+            <span>{loading ? "Carregando" : "Nenhum match"}</span>
+          )}
         </ul>
       </div>
-    );
-  };
-
-  const Match = ({ match }) => {
-    return (
-      <li>
-        <span>{match.name}</span>
-      </li>
     );
   };
 
@@ -46,11 +41,10 @@ function Matchs() {
       <ContainerMatch>
         <button onClick={() => navigate("/")}>ir home</button>
         <button onClick={() => buttonClearMatches()}>Limpar</button>
-        {loading ? "carregando" : ""}
         {renderMatches()}
       </ContainerMatch>
     </Container>
   );
 }
 
-export default Matchs;
+export default Matches;

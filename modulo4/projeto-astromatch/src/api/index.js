@@ -13,7 +13,7 @@ export const getProfile = () =>
   axios
     .get(`${baseURL}/person`, axiosConfig)
     .then((response) => response.data.profile)
-    .catch((err) => console.error(err));
+    .catch((err) => console.log("acabou profile"));
 
 export const chooseProfile = (personId, choice) => {
   const body = {
@@ -22,7 +22,7 @@ export const chooseProfile = (personId, choice) => {
   };
   axios
     .post(`${baseURL}/choose-person`, body, axiosConfig)
-    .then(() => console.log("escolhido"))
+    .then(() => {})
     .catch((err) => console.log(err));
 };
 
@@ -30,11 +30,11 @@ export const getMatches = () =>
   axios
     .get(`${baseURL}/matches`, axiosConfig)
     .then((response) => response.data.matches)
-    .catch((err) => console.log(err));
+    .catch((err) => console.log("erro get matches"));
 
 export const clearMatches = () => {
   axios
     .put(`${baseURL}/clear`)
-    .then((response) => console.log(response))
+    .then((response) => console.log("limpou"))
     .catch((err) => console.log(err));
 };
