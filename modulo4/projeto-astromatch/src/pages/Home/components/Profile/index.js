@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import { getProfile, chooseProfile } from "../../../../api";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+
+import { Favorite, Close } from "@mui/icons-material";
 
 function Profile() {
   const [profile, setProfile] = useState();
@@ -28,12 +32,20 @@ function Profile() {
           {profile ? (
             <div>
               <span>{profile.name}</span>
-              <button onClick={() => buttonChooseProfile(profile, true)}>
-                Sim
-              </button>
-              <button onClick={() => buttonChooseProfile(profile, false)}>
-                Não
-              </button>
+              <Stack spacing={5} direction="row">
+                <Button
+                  variant="contained"
+                  onClick={() => buttonChooseProfile(profile, false)}
+                >
+                  <Close color="gray" fontSize="large" />
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={() => buttonChooseProfile(profile, true)}
+                >
+                  <Favorite color="red" fontSize="large" />
+                </Button>
+              </Stack>
             </div>
           ) : (
             "carregando"

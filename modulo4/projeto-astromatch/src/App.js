@@ -1,17 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Theme from "./themes/theme";
 import Home from "./pages/Home";
 import Matches from "./pages/Matches";
 
 function App() {
   return (
-    <div>
+    <Theme>
       <BrowserRouter>
         <Routes>
           <Route path={"/"} element={<Home />} />
           <Route path={"/matchs"} element={<Matches />} />
         </Routes>
       </BrowserRouter>
-    </div>
+    </Theme>
   );
 }
 
