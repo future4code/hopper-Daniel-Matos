@@ -33,13 +33,13 @@ function Profile() {
   };
 
   return (
-    <div>
+    <Box
+      sx={{
+        padding: 2,
+      }}
+    >
       {profile !== null ? (
-        <Box
-          sx={{
-            padding: 2,
-          }}
-        >
+        <>
           {profile ? (
             <Stack spacing={2} justifyContent="center" alignItems="center">
               <ImageListItem key={1}>
@@ -83,7 +83,7 @@ function Profile() {
               <CircularProgress color="red" />
             </Box>
           )}
-        </Box>
+        </>
       ) : (
         <Typography
           variant="h6"
@@ -98,7 +98,7 @@ function Profile() {
           Acabou
         </Typography>
       )}
-    </div>
+    </Box>
   );
 }
 

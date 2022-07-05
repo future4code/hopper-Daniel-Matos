@@ -30,7 +30,7 @@ export const getMatches = () =>
   axios
     .get(`${baseURL}/matches`, axiosConfig)
     .then((response) => response.data.matches)
-    .catch((err) => console.log("erro get matches"));
+    .catch((err) => []);
 
 export const clearMatches = () => {
   axios
