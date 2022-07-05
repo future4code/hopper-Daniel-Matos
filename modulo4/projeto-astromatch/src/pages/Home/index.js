@@ -2,14 +2,13 @@ import { useNavigate } from "react-router-dom";
 // import { Container, ContainerMatch } from "../../styles";
 import {
   Container,
-  Grid,
   AppBar,
   Toolbar,
-  IconButton,
   Typography,
   Button,
+  Box,
 } from "@mui/material";
-import Profile from "./components/Profile";
+import Profile from "./Profile";
 
 function Home() {
   const navigate = useNavigate();
@@ -26,17 +25,7 @@ function Home() {
           </Button>
         </Toolbar>
       </AppBar>
-      <Grid
-        container
-        spacing={2}
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Grid item>
-          <Profile />
-        </Grid>
-      </Grid>
+      <Profile />
     </Container>
   );
 }
