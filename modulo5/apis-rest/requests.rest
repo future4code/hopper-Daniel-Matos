@@ -1,0 +1,7 @@
+Exercício 1
+a. GET 
+b. "/users"
+
+Exercício 2
+a. req.query.type
+b. type === "ADMIN" || type === "NORMAL"
