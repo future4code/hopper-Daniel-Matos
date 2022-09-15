@@ -47,6 +47,17 @@ app.get("/todos", (req: Request, res: Response) => {
     res.status(200).send(filteredTodos)
 })
 
+// EXE 6 
+app.put("/todos/:id", (req: Request, res: Response) => {
+    const todoId = req.params.id
+    const newTodos = todos.map(todo => {
+        if(todo.id === todoId) return {...todo, completed: !todo.completed}
+        return todo
+    })
+    
+    res.status(200).send(newTodos)
+})
+
 
 app.delete("", (request: Request, response: Response) => { })
 
