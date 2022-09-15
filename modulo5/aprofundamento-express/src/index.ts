@@ -58,8 +58,15 @@ app.put("/todos/:id", (req: Request, res: Response) => {
     res.status(200).send(newTodos)
 })
 
-
-app.delete("", (request: Request, response: Response) => { })
+// EXE 7 
+app.delete("/todos/:id", (req: Request, res: Response) => {
+    const todoId = req.params.id
+    const newTodos = todos.filter(todo => {
+        if(todo.id !== todoId) return true
+    })
+    
+    res.status(200).send(newTodos)
+})
 
 
 
