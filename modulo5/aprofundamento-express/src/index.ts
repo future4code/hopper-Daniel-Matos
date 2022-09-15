@@ -38,7 +38,7 @@ app.post("/todos", (req: Request, res: Response) => {
 
 // EXE 4
 app.get("/todos", (req: Request, res: Response) => {
-    const completed = (req.query.completed === "true")
+    const completed: boolean = (req.query.completed === "true")
     
     const filteredTodos: Todo[] = todos.filter((todo) => {
         return (completed && todo.completed) || (!completed && !todo.completed)
@@ -49,8 +49,8 @@ app.get("/todos", (req: Request, res: Response) => {
 
 // EXE 6 
 app.put("/todos/:id", (req: Request, res: Response) => {
-    const todoId = req.params.id
-    const newTodos = todos.map(todo => {
+    const todoId = req.params.id as string
+    const newTodos: Todo[] = todos.map(todo => {
         if(todo.id === todoId) return {...todo, completed: !todo.completed}
         return todo
     })
@@ -60,14 +60,24 @@ app.put("/todos/:id", (req: Request, res: Response) => {
 
 // EXE 7 
 app.delete("/todos/:id", (req: Request, res: Response) => {
-    const todoId = req.params.id
-    const newTodos = todos.filter(todo => {
+    const todoId = req.params.id as string
+    const newTodos: Todo[] = todos.filter(todo => {
         if(todo.id !== todoId) return true
     })
     
     res.status(200).send(newTodos)
 })
 
+// EXE 8
+app.get("/users/:userId/todos", (req: Request, res: Response) => {
+    const userId = req.params.userId as string
+    const userTodos = todos.filter(todo => {
+        if(todo.userId === userId) return true
+    })
+
+    res.status(200).send(userTodos)
+
+})
 
 
 app.listen(3003, () => {
