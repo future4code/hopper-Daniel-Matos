@@ -1,0 +1,13 @@
+GET http://localhost:3003/client
+Content-Type: application/json
+
+###
+
+POST http://localhost:3003/client/cleate
+Content-Type: application/json
+
+{ 
+  "nome": "Teste",
+  "cpf": "123.123.123-12", 
+  "dataNascimento":"16/01/2001"
+}
