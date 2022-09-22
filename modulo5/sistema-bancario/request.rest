@@ -18,3 +18,11 @@ GET http://localhost:3003/client/saldo
     ?nome=Daniel
     &cpf=123.123.123-12
 Content-Type: application/json
+
+###
+
+PATCH http://localhost:3003/client/saldo
+      ?nome=Daniel
+      &cpf=123.123.123-12
+      &saldo=2000
+Content-Type: application/json

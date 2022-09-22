@@ -77,6 +77,27 @@ app.get("/client/saldo", (req: Request, res: Response) => {
   }
 })
 
+app.patch("/client/saldo", (req: Request, res: Response) => {
+  let errorCode = 500
+  const nome = req.query.nome as string
+  const cpf = req.query.cpf as string
+  const saldo = Number(req.query.saldo)
+  const client = getClientByCPF(clients, cpf)
+
+  try {  
+    if(client.length === 0 || client[0].nome !== nome) {
+      errorCode = 404
+      throw new Error("Usuário não encontrado");
+    }
+
+    client[0].saldo += saldo
+
+    res.status(200).send(client)
+  } catch (error: any) {
+    res.status(errorCode).send(error.message)
+  }
+})
+
 const server = app.listen(process.env.PORT || 3003, () => {
   if (server) {
     const address = server.address() as AddressInfo;
