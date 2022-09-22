@@ -8,7 +8,7 @@ Content-Type: application/json
 
 { 
   "nome": "Teste",
-  "cpf": "123.123.123-12", 
+  "cpf": "113.123.123-12", 
   "dataNascimento":"16/10/2000"
 }
 

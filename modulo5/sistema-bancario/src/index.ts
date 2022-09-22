@@ -64,8 +64,14 @@ app.get("/client/saldo", (req: Request, res: Response) => {
   let errorCode = 500
   const nome = req.query.nome as string
   const cpf = req.query.cpf as string
-  try {
-    const client = getClientByCPF(clients, cpf)
+  const client = getClientByCPF(clients, cpf)
+  try {  
+    if(client.length === 0 || client[0].nome !== nome) {
+      errorCode = 404
+      throw new Error("Usuário não encontrado");
+    }
+
+    res.status(200).send(`${client[0].saldo}`)
   } catch (error: any) {
     res.status(errorCode).send(error.message)
   }
