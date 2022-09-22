@@ -17,30 +17,37 @@ const getIdade = (dateString: Date): number => {
   }
   return age;
 }
-const formatarDataNascimento = (data: string): string =>  {
-  const ano = data.split("/")[2]
-  const mes = data.split("/")[1]
-  const dia = data.split("/")[0]
-  return `${ano}-${mes}-${dia}`
+const getDate = (data?: string): string =>  {
+  if(data) {
+    const ano = data.split("/")[2]
+    const mes = data.split("/")[1]
+    const dia = data.split("/")[0]
+    return `${ano}-${mes}-${dia}`
+  } else {
+    const date = new Date()
+    const today = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+    return today
+  }
 }
 const getClientByCPF  = (clients: Client[], cpfNovoCliente: string): Client[] => {
   return clients.filter(c => c.cpf === cpfNovoCliente)
 }
 
-app.get('/client', (req: Request, res: Response) => {
+app.get('/client/all', (req: Request, res: Response) => {
   res.status(200).send(clients)
 })
 
-app.post("/client/cleate", (req: Request, res: Response) => {
+app.post("/client/create", (req: Request, res: Response) => {
   let errorCode = 500
   const client = req.body as Client
+
   try {
     if(!client.nome || !client.cpf || !client.dataNascimento) {
       errorCode = 422
       throw new Error("Ausência de parâmetros no body");
     }
 
-    client.dataNascimento = formatarDataNascimento(client.dataNascimento)
+    client.dataNascimento = getDate(client.dataNascimento)
     const idade: number = getIdade(new Date(client.dataNascimento))
     if(idade < 18) {
       errorCode = 422
@@ -65,6 +72,7 @@ app.get("/client/saldo", (req: Request, res: Response) => {
   const nome = req.query.nome as string
   const cpf = req.query.cpf as string
   const client = getClientByCPF(clients, cpf)
+
   try {  
     if(client.length === 0 || client[0].nome !== nome) {
       errorCode = 404
@@ -72,6 +80,7 @@ app.get("/client/saldo", (req: Request, res: Response) => {
     }
 
     res.status(200).send(`${client[0].saldo}`)
+
   } catch (error: any) {
     res.status(errorCode).send(error.message)
   }
@@ -91,8 +100,47 @@ app.patch("/client/saldo", (req: Request, res: Response) => {
     }
 
     client[0].saldo += saldo
-
     res.status(200).send(client)
+
+  } catch (error: any) {
+    res.status(errorCode).send(error.message)
+  }
+})
+
+app.put("/client/pagar-conta", (req: Request, res: Response) => {
+  let errorCode = 500
+  const cpf = req.query.cpf as string
+  const conta = req.body as Extrato
+  const [client] = getClientByCPF(clients, cpf)
+  
+  try {  
+    if(!client) {
+      errorCode = 404
+      throw new Error("Usuário não encontrado");
+    }
+    
+    if(!conta.valor) {
+      errorCode = 422
+      throw new Error("Valor da conta tem que ser maior que 0");
+    }
+
+    if(client.saldo < conta.valor) {
+      errorCode = 401
+      throw new Error("Saldo insuficiente");
+    }
+    
+    const data = getDate(conta.data)
+    const today = getDate() 
+    if(new Date(data) < new Date(today)) {
+      errorCode = 401
+      throw new Error("Data inválida");
+    }
+
+    conta.data = data
+    client.saldo -= conta.valor
+    client.extratos.push(conta)
+    res.status(200).send(`${JSON.stringify(client.extratos)}\n${client.saldo}`)
+
   } catch (error: any) {
     res.status(errorCode).send(error.message)
   }
