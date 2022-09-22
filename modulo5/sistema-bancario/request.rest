@@ -8,6 +8,13 @@ Content-Type: application/json
 
 { 
   "nome": "Teste",
-  "cpf": "333.123.123-12", 
+  "cpf": "123.123.123-12", 
   "dataNascimento":"16/10/2000"
 }
+
+###
+
+GET http://localhost:3003/client/saldo
+    ?nome=Daniel
+    &cpf=123.123.123-12
+Content-Type: application/json

@@ -23,14 +23,8 @@ const formatarDataNascimento = (data: string): string =>  {
   const dia = data.split("/")[0]
   return `${ano}-${mes}-${dia}`
 }
-const CPFJaExiste  = (clients: Client[], cpfNovoCliente: string): boolean => {
-  let existe = false
-  clients.forEach(c => {
-    if(c.cpf === cpfNovoCliente){
-      existe = true
-    }
-  })
-  return existe
+const getClientByCPF  = (clients: Client[], cpfNovoCliente: string): Client[] => {
+  return clients.filter(c => c.cpf === cpfNovoCliente)
 }
 
 app.get('/client', (req: Request, res: Response) => {
@@ -53,7 +47,7 @@ app.post("/client/cleate", (req: Request, res: Response) => {
       throw new Error("Cliente tem que ter 18 anos ou mais")
     }
 
-    if(CPFJaExiste(clients, client.cpf)) {
+    if(getClientByCPF(clients, client.cpf).length > 0) {
       errorCode = 422
       throw new Error("Este CPF já está cadastrado")
     }
@@ -61,6 +55,17 @@ app.post("/client/cleate", (req: Request, res: Response) => {
     clients.push({...client, saldo: 0, extratos: []})
     res.status(200).send(clients)
   
+  } catch (error: any) {
+    res.status(errorCode).send(error.message)
+  }
+})
+
+app.get("/client/saldo", (req: Request, res: Response) => {
+  let errorCode = 500
+  const nome = req.query.nome as string
+  const cpf = req.query.cpf as string
+  try {
+    const client = getClientByCPF(clients, cpf)
   } catch (error: any) {
     res.status(errorCode).send(error.message)
   }
