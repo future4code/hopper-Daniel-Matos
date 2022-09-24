@@ -73,7 +73,6 @@ app.get("/client/:nome/saldo", (req: Request, res: Response) => {
   const nome = req.params.nome as string
   const cpf = req.body.cpf as string
 
-  console.log(cpf)
   const [client] = getClientByCPF(clients, cpf)
 
   try {  
@@ -153,12 +152,42 @@ app.put("/client/:nome/pagar-conta", (req: Request, res: Response) => {
 app.put("/transferencia", (req: Request, res: Response)=> {
   let errorCode = 500
   const transferencia = req.body as Transferencia
-})
+  const [clientRemetente] = getClientByCPF(clients, transferencia.cpfRemetente)
+  const [clientDestinatario] = getClientByCPF(clients, transferencia.cpfDestinatario)
+  const nomeRemetente = transferencia.nomeRemetente
+  const nomeDestinatario = transferencia.nomeDestinatario
+  const today = getDate()
+  try {
+    if(!clientRemetente 
+      || !clientDestinatario
+      || clientRemetente.nome !== nomeRemetente 
+      || clientDestinatario.nome !== nomeDestinatario) 
+    {
+      errorCode = 404
+      throw new Error("Usuário não encontrado");
+    }
 
-// transferencia interna
-// nome, cpf, nome destinatario, cpf, valor
-// n pode ser agendado
-// respeitar saldo
+    if(clientRemetente.saldo < transferencia.valor) {
+      errorCode = 401
+      throw new Error("Saldo insuficiente");
+    }
+
+    clientRemetente.saldo -= transferencia.valor
+    clientRemetente.extratos.push(
+      {
+        valor: transferencia.valor,
+        data: today, 
+        descricao: `Transferencia interna para ${clientDestinatario.nome}`
+      }
+    )
+    clientDestinatario.saldo += transferencia.valor 
+
+    res.status(200).send(clients)
+
+  } catch (error: any) {
+    res.status(errorCode).send(error.message)
+  }
+})
 
 const server = app.listen(process.env.PORT || 3003, () => {
   if (server) {
