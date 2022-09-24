@@ -1,7 +1,8 @@
 import express, { Request, Response } from "express";
 import cors from "cors"
 import { AddressInfo } from "net";
-import { Client, clients, Extrato } from "./data";
+import { clients } from "./data";
+import { Client, Extrato, Transferencia } from "./types";
 
 const app = express();
 app.use(express.json());
@@ -67,39 +68,41 @@ app.post("/client/create", (req: Request, res: Response) => {
   }
 })
 
-app.get("/client/saldo", (req: Request, res: Response) => {
+app.get("/client/:nome/saldo", (req: Request, res: Response) => {
   let errorCode = 500
-  const nome = req.query.nome as string
-  const cpf = req.query.cpf as string
-  const client = getClientByCPF(clients, cpf)
+  const nome = req.params.nome as string
+  const cpf = req.body.cpf as string
+
+  console.log(cpf)
+  const [client] = getClientByCPF(clients, cpf)
 
   try {  
-    if(client.length === 0 || client[0].nome !== nome) {
+    if(!client || client.nome !== nome) {
       errorCode = 404
       throw new Error("Usuário não encontrado");
     }
 
-    res.status(200).send(`${client[0].saldo}`)
+    res.status(200).send(`${client.saldo}`)
 
   } catch (error: any) {
     res.status(errorCode).send(error.message)
   }
 })
 
-app.patch("/client/saldo", (req: Request, res: Response) => {
+app.patch("/client/:nome/saldo", (req: Request, res: Response) => {
   let errorCode = 500
-  const nome = req.query.nome as string
-  const cpf = req.query.cpf as string
-  const saldo = Number(req.query.saldo)
-  const client = getClientByCPF(clients, cpf)
+  const nome = req.params.nome as string
+  const cpf = req.body.cpf as string
+  const saldo = req.body.saldo as number
+  const [client] = getClientByCPF(clients, cpf)
 
   try {  
-    if(client.length === 0 || client[0].nome !== nome) {
+    if(!client || client.nome !== nome) {
       errorCode = 404
       throw new Error("Usuário não encontrado");
     }
 
-    client[0].saldo += saldo
+    client.saldo += saldo
     res.status(200).send(client)
 
   } catch (error: any) {
@@ -107,14 +110,15 @@ app.patch("/client/saldo", (req: Request, res: Response) => {
   }
 })
 
-app.put("/client/pagar-conta", (req: Request, res: Response) => {
+app.put("/client/:nome/pagar-conta", (req: Request, res: Response) => {
   let errorCode = 500
-  const cpf = req.query.cpf as string
-  const conta = req.body as Extrato
+  const nome = req.params.nome as string
+  const cpf = req.body.cpf as string
+  const conta = req.body.conta as Extrato
   const [client] = getClientByCPF(clients, cpf)
   
   try {  
-    if(!client) {
+    if(!client || client.nome !== nome) {
       errorCode = 404
       throw new Error("Usuário não encontrado");
     }
@@ -145,6 +149,16 @@ app.put("/client/pagar-conta", (req: Request, res: Response) => {
     res.status(errorCode).send(error.message)
   }
 })
+
+app.put("/transferencia", (req: Request, res: Response)=> {
+  let errorCode = 500
+  const transferencia = req.body as Transferencia
+})
+
+// transferencia interna
+// nome, cpf, nome destinatario, cpf, valor
+// n pode ser agendado
+// respeitar saldo
 
 const server = app.listen(process.env.PORT || 3003, () => {
   if (server) {
