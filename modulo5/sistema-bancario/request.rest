@@ -1,0 +1,59 @@
+GET http://localhost:3003/client/all
+Content-Type: application/json
+
+###
+
+POST http://localhost:3003/client/create
+Content-Type: application/json
+
+{ 
+  "nome": "B",
+  "cpf": "1",
+  "dataNascimento":"16/10/2000"
+}
+
+###
+
+GET http://localhost:3003/client/A/saldo
+Content-Type: application/json
+
+{
+  "cpf": "2"
+}
+
+###
+
+PATCH http://localhost:3003/client/A/saldo
+Content-Type: application/json
+
+{
+  "cpf": "2",
+  "saldo": 2000
+}
+
+###
+
+PUT http://localhost:3003/client/B/pagar-conta
+Content-Type: application/json
+
+{
+  "cpf": "1",
+  "conta": {
+    "valor": 1000,
+    "data": "02/10/2023",
+    "descricao": "2"
+  }
+}
+
+###
+
+PUT http://localhost:3003/transferencia
+Content-Type: application/json
+
+{
+  "nomeRemetente": "A",
+  "cpfRemetente": "2",
+  "nomeDestinatario": "B",
+  "cpfDestinatario": "1",
+  "valor": 30000
+}
